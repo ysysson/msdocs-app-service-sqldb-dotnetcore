@@ -19,7 +19,7 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '8.x'
+          dotnet-version: '7.x'
           include-prerelease: true
 
       - name: Build with dotnet
@@ -27,13 +27,7 @@ jobs:
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-# 추가        
-      - name: dotnet install ef 
-        run: dotnet tool install -g dotnet-ef
 
-      - name: dotnet bundle migration
-        run: dotnet ef migrations bundle --runtime linux-x64 -p DotNetCoreSqlDb/DotNetCoreSqlDb.csproj -o \${{env.DOTNET_ROOT}}/myapp/migrate
-      
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
@@ -60,4 +54,4 @@ jobs:
           app-name: 'ysson-apm-webapp-2'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1B7E1FBE5EBB4A0EB0210E21B7D60321 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D29A291644A64DD48C83D57CD2B7D3CF }}
